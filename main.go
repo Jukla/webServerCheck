@@ -177,8 +177,7 @@ func domainWorker(domainC <-chan string, logC chan<- string, errC chan<- string,
 
 	}
 	wg.Done()
-
-	return
+	
 }
 
 // testUriAvailability tests the availability concurrently of uri1 and uri2 and returns true if both tests
