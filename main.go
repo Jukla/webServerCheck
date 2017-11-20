@@ -176,8 +176,8 @@ func domainWorker(domainC <-chan string, logC chan<- string, errC chan<- string,
 		}
 
 	}
-	wg.Done()
 	
+	wg.Done()	
 }
 
 // testUriAvailability tests the availability concurrently of uri1 and uri2 and returns true if both tests
@@ -252,20 +252,20 @@ func handleMainLog(mainLogFile *string, logC <-chan string, logFinishedC chan<- 
 
 	f, err := os.OpenFile(*mainLogFile, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
-		panic(fmt.Sprintf("Error opening %s for writing.\n", mainLogFile))
+		panic(fmt.Sprintf("Error opening %s for writing.\n", *mainLogFile))
 	}
 
 	for msg := range logC {
 		_, err = f.WriteString(msg)
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "Error writing to file %s\n", mainLogFile)
+			fmt.Fprintf(os.Stderr, "Error writing to file %s\n", *mainLogFile)
 		}
 		okCount++
 	}
 
 	_, err = f.WriteString(fmt.Sprintf("\t\t    --> Ok:\t  %d\n", okCount))
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error writing to file %s\n", mainLogFile)
+		fmt.Fprintf(os.Stderr, "Error writing to file %s\n", *mainLogFile)
 	}
 
 	f.Close()
@@ -276,13 +276,13 @@ func handleMainLog(mainLogFile *string, logC <-chan string, logFinishedC chan<- 
 func handleErrorLog(errorLogFile *string, errCount *uint16, errC <-chan string, errLogFinishedC chan<- struct{}) {
 	f, err := os.OpenFile(*errorLogFile, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
-		panic(fmt.Sprintf("Error opening %s for writing.\n", errorLogFile))
+		panic(fmt.Sprintf("Error opening %s for writing.\n", *errorLogFile))
 	}
 
 	for msg := range errC {
 		_, err = f.WriteString(msg)
 		if err != nil {
-			fmt.Fprintf(os.Stderr, "Error writing to file %s\n", errorLogFile)
+			fmt.Fprintf(os.Stderr, "Error writing to file %s\n", *errorLogFile)
 		}
 		*errCount++
 	}
