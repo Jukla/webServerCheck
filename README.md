@@ -7,7 +7,7 @@ You can parse a configuration file with several vhosts in it for domains to chec
 Two URI can be test against every vhost: uri1 and uri2
 
 Regular status messages like statistics and domains that are ok, are logged in './main."timestamp".log'
-Problems/errors are logged in './main."timestamp".log'
+Problems/errors are logged in './error."timestamp".log'
 
 
 ToDo:
