@@ -17,4 +17,4 @@ ToDo:
 
 
 
-If you see problems with this code or parts that can be done better, please comment or push a commit. Thank you.
+If you see problems with this code or parts that can be done better, please comment or create a pull request. Thank you.
